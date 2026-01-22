@@ -8,5 +8,7 @@ const router = new express.Router()
 router.get('/recipes',recipeController.getAllRecipesController)
 //register
 router.post('/register',userController.registerController)
+//login
+router.post('/login',userController.loginController)
 
 module.exports = router
