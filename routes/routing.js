@@ -1,6 +1,8 @@
 const express = require('express')
 const recipeController = require('../controllers/recipeController')
 const userController = require('../controllers/userController')
+const downloadController = require('../controllers/downloadController')
+const jwtMiddleware = require('../middleware/jwtMiddleware')
 
 const router = new express.Router()
 
@@ -10,9 +12,13 @@ router.get('/recipes',recipeController.getAllRecipesController)
 router.post('/register',userController.registerController)
 //login
 router.post('/login',userController.loginController)
+
+//---------------- Authorised user-----------------------
 //view  recipe
-router.get('/recipes/:id',recipeController.viewRecipeController)
+router.get('/recipes/:id',jwtMiddleware,recipeController.viewRecipeController)
 //get related  recipe
-router.get('/related-recipes',recipeController.relatedRecipesController)
+router.get('/related-recipes',jwtMiddleware,recipeController.relatedRecipesController)
+//addtodownload
+router.post('/downloads/:id',jwtMiddleware,downloadController.addToDownloadsController)
 
 module.exports = router
