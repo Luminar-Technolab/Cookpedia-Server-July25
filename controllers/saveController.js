@@ -4,10 +4,13 @@ const saveRecipes = require('../models/saveRecipeModel')
 exports.addToSaveRecipeController = async (req,res)=>{
     console.log("Inside addToSaveRecipeController");
     const {id} = req.params
+    
     const userMail = req.payload
     const {name,image} = req.body
     try{
         const exisitingRecipe = await saveRecipes.findOne({recipeId:id,userMail})
+        console.log(exisitingRecipe);
+        
         if(exisitingRecipe){
             res.status(409).json("Recipe already in your collection... Add Another!!!")
         }else{

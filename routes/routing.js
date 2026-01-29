@@ -5,6 +5,7 @@ const downloadController = require('../controllers/downloadController')
 const jwtMiddleware = require('../middleware/jwtMiddleware')
 const saveController = require('../controllers/saveController')
 const feedbackController =  require('../controllers/feedbackController')
+const multerMiddleware = require('../middleware/multerMiddleware')
 
 const router = new express.Router()
 
@@ -16,6 +17,8 @@ router.post('/register',userController.registerController)
 router.post('/login',userController.loginController)
 //add feedback
 router.post('/feedback',feedbackController.addFeedbackController)
+//get approve feedbacks
+router.get('/feedbacks-approve',feedbackController.getApproveFeedbackController)
 
 //---------------- Authorised user-----------------------
 //view  recipe
@@ -32,5 +35,8 @@ router.get('/recipe-collection',jwtMiddleware,saveController.getUserSaveRecipesC
 router.delete('/recipe-collection/:id',jwtMiddleware,saveController.removeUserRecipeItemController)
 //get user downlad  recipe list
 router.get('/user-downloads',jwtMiddleware,downloadController.getUserDownloadListController)
+//edit user picture 
+router.put('/user-edit',jwtMiddleware,multerMiddleware.single('picture'),userController.editUserPictureController)
+
 
 module.exports = router
