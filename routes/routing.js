@@ -46,5 +46,8 @@ router.get('/downloads',adminMiddleware,downloadController.getDownloadListContro
 router.get('/feedbacks',adminMiddleware,feedbackController.getAllFeedbackController)
 //update  feedbacks 
 router.put('/feedbacks/:id',adminMiddleware,feedbackController.updateFeedbackStatusController)
+//add recipe 
+router.post('/recipes',adminMiddleware,recipeController.addRecipeController)
+
 
 module.exports = router
