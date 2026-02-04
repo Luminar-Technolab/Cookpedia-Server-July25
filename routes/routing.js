@@ -48,6 +48,10 @@ router.get('/feedbacks',adminMiddleware,feedbackController.getAllFeedbackControl
 router.put('/feedbacks/:id',adminMiddleware,feedbackController.updateFeedbackStatusController)
 //add recipe 
 router.post('/recipes',adminMiddleware,recipeController.addRecipeController)
+//delete recipe 
+router.delete('/recipes/:id',adminMiddleware,recipeController.removeRecipeController)
+//edit recipe 
+router.put('/recipes/:id',adminMiddleware,recipeController.editRecipeController)
 
 
 module.exports = router
